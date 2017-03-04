@@ -42,5 +42,25 @@
 <div id="example1"></div>
 <div id="example2"></div>
 
+<script type="text/javascript" src="../js/react.js"></script>
+<script type="text/javascript" src="../js/react-dom.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript">
+  var div1 = document.getElementById('example1') //比较重的对象
+  console.log(div1)
+
+  //创建虚拟DOM对象
+  var vElement = React.createElement('h1', {id: 'myId'}, 'createElement创建的虚拟元素') //比较轻的对象
+  ReactDOM.render(vElement, div1)
+</script>
+
+<script type="text/babel">
+  //创建虚拟DOM(JSX)
+  var id = 'abc'
+  var title = 'JSX element'
+  var vElement2 = <h1 id={id}>{title}</h1>
+  //渲染
+  ReactDOM.render(vElement2, document.getElementById('example2'))
+</script>
 </body>
 </html>
