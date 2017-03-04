@@ -37,14 +37,44 @@
   2). 渲染组件标签
     ReactDOM.render(<MyComponent/>, document.getElementById('example'));
 2. 注意:
-  1). 返回的组件类必须首字母大写
+  1). 组件名必须首字母大写
   2). 虚拟DOM元素必须只有一个根元素
   3). 虚拟DOM元素必须有结束标签
 3. ReactDOM.render()渲染组件标签的基本流程
-  1). React内部会创建组件实例对象
-  2). 得到包含的虚拟DOM并解析为真实DOM
+  1). 得到组件内部包含的虚拟DOM(调用函数直接得到/创建实例对象调用render()得到)
+  2). 将虚拟DOM转换为真实DOM
   3). 插入到指定的页面元素内部
 */
+  //1. 定义组件
+    //1). function (简单组件)
+  function MyComponent1() {
+    return <h2>工厂(无状态)函数--->自定义组件标题11111</h2>
+  }
+    //2). class (复杂组件)
+  class MyComponent2 extends React.Component {
+    render () {
+      return (
+          <div>
+            <h2>ES6类语法--->自定义组件标题22222</h2>
+            <p>xxxxxx</p>
+            <input/>
+          </div>
+      )
+    }
+  }
+    //3). ES5老语法(不推荐使用了)
+  const MyComponent3 = React.createClass({
+    render() {
+      return <h2>ES5老语法--->自定义组件标题3333</h2>
+    }
+  })
+  console.log(typeof MyComponent3, typeof MyComponent2)
+
+  //2. 渲染组件标签
+  ReactDOM.render(<MyComponent1 />, document.getElementById('example1'))
+  ReactDOM.render(<MyComponent2 />, document.getElementById('example2'))
+  ReactDOM.render(<MyComponent3 />, document.getElementById('example3'))
+
 </script>
 </body>
 </html>
