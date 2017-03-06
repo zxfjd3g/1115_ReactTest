@@ -63,11 +63,13 @@
       }
 
       render () {
+
+        const {todos} = this.state
         return (
           <div>
             <h2>Simple TODO List</h2>
-            <TodoAdd add={this.add}/>
-            <TodoList todos={this.state.todos}/>
+            <TodoAdd add={this.add} length={todos.length}/>
+            <TodoList todos={todos}/>
           </div>
         )
       }
@@ -77,7 +79,11 @@
 
       addTodo() {
         //读取输入的数据
-        const inputTodo = this.refs.inputTodo.value
+        const inputTodo = this.refs.inputTodo.value.trim()
+        if(!inputTodo) { //如果没有正常输入不添加
+          return
+        }
+
         //添加到todos
         this.props.add(inputTodo)
         //清除输入
@@ -88,7 +94,7 @@
         return (
           <div>
             <input type="text" ref="inputTodo"/>
-            <button onClick={this.addTodo.bind(this)}>Add #4</button>
+            <button onClick={this.addTodo.bind(this)}>Add #{this.props.length+1}</button>
           </div>
         )
       }
