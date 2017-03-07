@@ -28,42 +28,39 @@
 
   class UserGist extends React.Component {
     constructor(props) {
-      super(props);
+      super(props)
       this.state = {
         lastGistUrl: null
-      };
+      }
     }
 
     componentDidMount() {
       const url = `https://api.github.com/users/${this.props.name}/gists`
       axios.get(url)
-          .then((response) => {
-            console.log(response.data)
-            var data = response.data;
+        .then((response) => {
+          console.log(response.data)
+          var data = response.data
 
-            var lastGist = data[0];
+          var lastGist = data[0]
+          this.setState({
+            lastGistUrl: lastGist.html_url
+          })
+        })
+        .catch((error) => {
+          console.log(error.response.data)
+        })
+
+      /*fetch(url)
+        .then(response => response.json())
+        .then(
+          result => {
+            var lastGist = result[0]
             this.setState({
               lastGistUrl: lastGist.html_url
-            });
-          })
-          .catch((error) => {
-            console.log(error.response.data);
-          });
-
-      /*fetch(url).then(
-          (response) => {
-            response.json().then((result) => {
-              console.log(result);
-              var lastGist = result[0];
-              this.setState({
-                lastGistUrl: lastGist.html_url
-              });
             })
-          },
-          (error) => {
-            console.log(error);
           }
-      );*/
+        )
+        .catch(e => console.log(e.message))*/
     }
 
     render() {
@@ -74,13 +71,13 @@
             <div>
               {this.props.name}'s last gist is <a href={this.state.lastGistUrl}>here</a>
             </div>
-        );
+        )
       }
     }
   }
 
   var name = 'octocat'
-  ReactDOM.render(<UserGist name={name}/>, document.getElementById('example'));
+  ReactDOM.render(<UserGist name={name}/>, document.getElementById('example'))
 </script>
 </body>
 </html>
